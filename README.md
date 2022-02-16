@@ -8,9 +8,9 @@ The prototype of this sound card is a "musical cell" from the old Soviet compute
 
 ## Description
 This sound card based on two i8253 timers IC (K580VI53 rus). Each i8253 contains three counters channels, two i8253 provide six independed channels. 
-*Six counters are masters for the tonal channels. 
-*Six tone channel switching units - provide a smooth attack and signal transmission from timers / counters to bandpass filters.
-*Passive bandpass RC filters - extract parts of the spectrum in tone channels.
-*Noise generator and drum generators (a group of three CMOS IC) - form two drum channels.
+* Six counters are masters for the tonal channels. 
+* Six tone channel switching units - provide a smooth attack and signal transmission from timers / counters to bandpass filters.
+* Passive bandpass RC filters - extract parts of the spectrum in tone channels.
+* Noise generator and drum generators (a group of three CMOS IC) - form two drum channels.
 
 Comming sooon.....
