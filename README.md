@@ -13,4 +13,6 @@ This sound card based on two i8253 timers IC (K580VI53 rus). Each i8253 contains
 * Passive bandpass RC filters - extract parts of the spectrum in tone channels.
 * Noise generator and drum generators (a group of three CMOS IC) - form two drum channels.
 
+![block_diagram](docs/bd.png)
+
 Comming sooon.....
