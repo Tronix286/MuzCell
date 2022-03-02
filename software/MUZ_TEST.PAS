@@ -1,5 +1,7 @@
 Uses CRT;
 Const
+     ProbePorts : Array [1..8] of Word =
+     ($300,$310,$320,$330,$380,$390,$3A0,$3B0);
      FreqKHz : Array [0..1] of String = (' KHz', ' КГц');
      FreqHz  : Array [0..1] of String = (' Hz', ' Гц');
      WritePort : Array [0..1] of String = ('Write to port 0x','Записал в порт 0x');
@@ -29,6 +31,7 @@ Const
 Var
    Lang         : Byte;
    SndPort      : Word;
+   t1,t2        : Byte;
    i, j         : Byte;
    OrigMode     : Integer;
    f            : longint;
@@ -109,7 +112,46 @@ End;
 
 Begin
      Lang := 0; {english}
-     SndPort := $300;
+     SndPort := 0;
+     For i := 1 to 8 do
+         Begin
+              Port[ProbePorts[i]+$0f] := $80; {disable GATE}
+              Port[ProbePorts[i]+3] := $3E;
+              Port[ProbePorts[i]+3] := $7E;
+              Port[ProbePorts[i]+3] := $BE;
+              Port[ProbePorts[i]] := $AA;
+              Port[ProbePorts[i]] := $55;
+              Port[ProbePorts[i]] := $AA;
+              Port[ProbePorts[i]] := $55;
+              Port[ProbePorts[i]] := $AA;
+              Port[ProbePorts[i]] := $55;
+              t1 := Port[ProbePorts[i]];
+              t2 := Port[ProbePorts[i]];
+              If (t1 = $AA) and (t2 = $55) then
+                 Begin
+                      SndPort := ProbePorts[i];
+                      break;
+                 End
+              Else
+                  Begin
+                       S := Dec2Hex(ProbePorts[i]);
+                       Delete(S,1,1);
+                       WriteLn('Probe port 0x',S,' false [t1=',Dec2Hex(t1),'; t2=',Dec2Hex(t2),']');
+                  End;
+         End;
+     If SndPort = 0 then
+        Begin
+             WriteLn('MUZ_CELL not found');
+             Halt;
+        End;
+     Port[ProbePorts[i]+3] := $3E; {set up 1-st 8253}
+     Port[ProbePorts[i]+3] := $7E;
+     Port[ProbePorts[i]+3] := $BE;
+     Port[ProbePorts[i]+7] := $3E; {set up 2-nd 8253}
+     Port[ProbePorts[i]+7] := $7E;
+     Port[ProbePorts[i]+7] := $BE;
+     Port[ProbePorts[i]+$0f] := $0; {enable GATE}
+
      OrigMode := LastMode;
      TextMode(CO40);
      For i := 1 to 6 do
@@ -267,19 +309,19 @@ Begin
                 S := Dec2Hex(CurPort);
                 Delete(S,1,1);
                 Write(WritePort[Lang],S);
-                S := Dec2Hex(Hi(ChDividers[CurChan]));
+                S := Dec2Hex(Lo(ChDividers[CurChan]));
                 Delete(S,1,2);
                 Write(ByteStr[Lang],S);
                 GotoXY(6,19);
                 S := Dec2Hex(CurPort);
                 Delete(S,1,1);
                 Write(WritePort[Lang],S);
-                S := Dec2Hex(Lo(ChDividers[CurChan]));
+                S := Dec2Hex(Hi(ChDividers[CurChan]));
                 Delete(S,1,2);
                 Write(ByteStr[Lang],S);
 
-                Port[CurPort] := Hi(ChDividers[CurChan]);
                 Port[CurPort] := Lo(ChDividers[CurChan]);
+                Port[CurPort] := Hi(ChDividers[CurChan]);
                 NeedChUpdate := False;
               End;
 
