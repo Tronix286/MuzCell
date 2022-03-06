@@ -220,6 +220,7 @@ byte Patch6502(register byte Op,register M6502 *R)
 
 int main(int argc, char **argv) 
 {
+ printf("AGATPLAY v1.0 (c) Tronix 2022\n\n");
  mem=malloc(MEM_SIZE);
  if (mem==NULL)
  {
@@ -233,7 +234,7 @@ int main(int argc, char **argv)
 
  if (argc < 2)
  {
-   printf("agatplay <music.bin>\n");
+   printf("agatplay <music.mus>\n");
    exit(1);
  }
 	memset(mem,0,MEM_SIZE);
@@ -297,7 +298,7 @@ int main(int argc, char **argv)
  printf("Playing %s now. Press any key to terminate...\n",romfile);
 
  cpuregs.PC.W = 0xe000;
- cpuregs.IPeriod = 100;
+ cpuregs.IPeriod = 1000;
 // cpuregs.IAutoReset = 1;
  //cpuregs.Trace = 1;
  cpuregs.Verbose = 1;
@@ -305,10 +306,10 @@ int main(int argc, char **argv)
 
  Run6502(&cpuregs);
 
-
+/*
  f = fopen( "dump.mem" , "w" );
  fwrite(mem,MEM_SIZE,1,f);
  fclose(f);
-
+*/
  return(0);
 }
