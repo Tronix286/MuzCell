@@ -16,6 +16,7 @@ Esc to quit.
 http://dosmid.sourceforge.net/
 
 DOSMID a low-requirements MIDI player for DOS (C) Mateusz Vistelink. 
+
 This is a modified version with MuzCell music card support.
 
 New DOSMid options:
@@ -25,6 +26,10 @@ New DOSMid options:
 is optional, that means you can use "/mcell" to just force MuzCell 
 usage on default 300h port.
 ```
+
+TODO LIST:
+- [ ] Add velocity control
+- [ ] Map General MIDI 1 percussion instruments to the drums channels 7,8 of the MuzCell.
 
 ## AGATPLAY
 
