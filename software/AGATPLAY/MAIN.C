@@ -107,6 +107,7 @@ void Wr6502(register word Addr,register byte Value)
 					rl = 0;
 					period = (Value << 8) | period;
 					if (period == 0) period = 1;
+					if (period > IRQ_CLOCK) period = IRQ_CLOCK;
 					period_ms = 1000 / (IRQ_CLOCK / period);
 					#ifdef BE_VERBOSE
 					printf("PERIOD = %X ms = %u\n",period,period_ms);
