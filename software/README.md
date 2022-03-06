@@ -3,6 +3,7 @@
 * MUZ_TEST - Diagnostics and test MuzCell;
 * DOSMID - Modified version of DOSMID MIDI player to support MuzCell output;
 * AGATPLAY - Player for original Agat's music files *.MUS
+* SOFTMPU - Experimental version of SoftMPU. It can be used to launch games that have a choice of "General MIDI/ MPU401" sound device. 
 
 ## MUZ_TEST
 
@@ -38,4 +39,13 @@ Player for original Agat's music *.MUS files.
 Usage: 
 ```
 AGATPLAY <music.MUS>
+```
+
+## SOFTMPU
+
+Experimental version of SoftMPU for MuzCell. It can be used to launch games that have a choice of "General MIDI/ MPU401" sound device. 
+Usage:
+```
+softmpu.exe /mpu:330 /output:mcell[=xxx]
+where =xxx - MuzCell port address
 ```
