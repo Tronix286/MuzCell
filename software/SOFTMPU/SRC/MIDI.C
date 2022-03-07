@@ -104,7 +104,7 @@ static Bit8u atten[128] = {
                  15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
         };
 
-const unsigned char octavetable[128] = {                         /* note # */
+static unsigned char octavetable[128] = {                         /* note # */
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                          /*  0 */
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                          /* 12 */
         0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,                          /* 24 */
@@ -117,7 +117,7 @@ const unsigned char octavetable[128] = {                         /* note # */
         7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,                         /* 108 */
         7, 7, 7, 7, 7, 7, 7, 7};                                    /* 120 */
 
-Bit8u freqtable[128] = {
+unsigned short freqtable[128] = {
     8,    9,    9,   10,   10,   11,   12,   12,   13,   14,   15,   15,
    16,   17,   18,   19,   21,   22,   23,   24,   26,   28,   29,   31,
    33,   35,   37,   39,   41,   44,   46,   49,   52,   55,   58,   62,
@@ -130,18 +130,39 @@ Bit8u freqtable[128] = {
  4186, 4435, 4699, 4978, 5274, 5588, 5920, 6272, 6645, 7040, 7459, 7902,
  8372, 8870, 9397, 9956,10548,11175,11840,12544};
 
-unsigned short periodtable[128] = {
-65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,
-62467,58961,55651,52528,49580,46797,44171,41691,39352,37143,35058,33091,
-31233,29480,27826,26264,24790,23399,22085,20846,19676,18571,17529,16545,
-15617,14740,13913,13132,12395,11699,11043,10423, 9838, 9286, 8765, 8273,
- 7808, 7370, 6956, 6566, 6197, 5850, 5521, 5211, 4919, 4643, 4382, 4136,
- 3904, 3685, 3478, 3283, 3099, 2925, 2761, 2606, 2459, 2321, 2191, 2068,
- 1952, 1843, 1739, 1641, 1549, 1462, 1380, 1303, 1230, 1161, 1096, 1034,
-  976,  921,  870,  821,  775,  731,  690,  651,  615,  580,  548,  517,
-  488,  461,  435,  410,  387,  366,  345,  326,  307,  290,  274,  259,
-  244,  230,  217,  205,  194,  183,  173,  163,  154,  145,  137,  129,
-  122,  115,  109,  103,   97,   91,   86,   81};
+unsigned short pitchtable[256] = {                    /* pitch wheel */
+         29193U,29219U,29246U,29272U,29299U,29325U,29351U,29378U,  /* -128 */
+         29405U,29431U,29458U,29484U,29511U,29538U,29564U,29591U,  /* -120 */
+         29618U,29644U,29671U,29698U,29725U,29752U,29778U,29805U,  /* -112 */
+         29832U,29859U,29886U,29913U,29940U,29967U,29994U,30021U,  /* -104 */
+         30048U,30076U,30103U,30130U,30157U,30184U,30212U,30239U,  /*  -96 */
+         30266U,30293U,30321U,30348U,30376U,30403U,30430U,30458U,  /*  -88 */
+         30485U,30513U,30541U,30568U,30596U,30623U,30651U,30679U,  /*  -80 */
+         30706U,30734U,30762U,30790U,30817U,30845U,30873U,30901U,  /*  -72 */
+         30929U,30957U,30985U,31013U,31041U,31069U,31097U,31125U,  /*  -64 */
+         31153U,31181U,31209U,31237U,31266U,31294U,31322U,31350U,  /*  -56 */
+         31379U,31407U,31435U,31464U,31492U,31521U,31549U,31578U,  /*  -48 */
+         31606U,31635U,31663U,31692U,31720U,31749U,31778U,31806U,  /*  -40 */
+         31835U,31864U,31893U,31921U,31950U,31979U,32008U,32037U,  /*  -32 */
+         32066U,32095U,32124U,32153U,32182U,32211U,32240U,32269U,  /*  -24 */
+         32298U,32327U,32357U,32386U,32415U,32444U,32474U,32503U,  /*  -16 */
+         32532U,32562U,32591U,32620U,32650U,32679U,32709U,32738U,  /*   -8 */
+         32768U,32798U,32827U,32857U,32887U,32916U,32946U,32976U,  /*    0 */
+         33005U,33035U,33065U,33095U,33125U,33155U,33185U,33215U,  /*    8 */
+         33245U,33275U,33305U,33335U,33365U,33395U,33425U,33455U,  /*   16 */
+         33486U,33516U,33546U,33576U,33607U,33637U,33667U,33698U,  /*   24 */
+         33728U,33759U,33789U,33820U,33850U,33881U,33911U,33942U,  /*   32 */
+         33973U,34003U,34034U,34065U,34095U,34126U,34157U,34188U,  /*   40 */
+         34219U,34250U,34281U,34312U,34343U,34374U,34405U,34436U,  /*   48 */
+         34467U,34498U,34529U,34560U,34591U,34623U,34654U,34685U,  /*   56 */
+         34716U,34748U,34779U,34811U,34842U,34874U,34905U,34937U,  /*   64 */
+         34968U,35000U,35031U,35063U,35095U,35126U,35158U,35190U,  /*   72 */
+         35221U,35253U,35285U,35317U,35349U,35381U,35413U,35445U,  /*   80 */
+         35477U,35509U,35541U,35573U,35605U,35637U,35669U,35702U,  /*   88 */
+         35734U,35766U,35798U,35831U,35863U,35895U,35928U,35960U,  /*   96 */
+         35993U,36025U,36058U,36090U,36123U,36155U,36188U,36221U,  /*  104 */
+         36254U,36286U,36319U,36352U,36385U,36417U,36450U,36483U,  /*  112 */
+         36516U,36549U,36582U,36615U,36648U,36681U,36715U,36748U}; /*  120 */
 
 // Logic channel - first chip/second chip
 static unsigned char ChanReg[6] =  {000,001,002,004,005,006};
@@ -522,6 +543,39 @@ _asm
    }
 }
 
+void mcellAllDrumOff(void)
+{
+_asm
+   {
+                mov   dx,midi.mcellport
+                add   dx,0eh
+                xor   al,al
+                        cmp     qemm.installed,1
+                        jne     DUntrappedOUT
+                        push    bx
+                        mov     bl,al                   ; bl = value
+                        mov     ax,01A01h               ; QPI_UntrappedIOWrite
+                        call    qemm.qpi_entry
+                        pop     bx
+                        _emit   0A8h                    ; Emit test al,(next opcode byte)
+                                                        ; Effectively skips next instruction
+        DUntrappedOUT:
+                out   dx,al
+                
+                inc dx
+                        cmp     qemm.installed,1
+                        jne     D2UntrappedOUT
+                        push    bx
+                        mov     bl,al                   ; bl = value
+                        mov     ax,01A01h               ; QPI_UntrappedIOWrite
+                        call    qemm.qpi_entry
+                        pop     bx
+                        _emit   0A8h                    ; Emit test al,(next opcode byte)
+                                                        ; Effectively skips next instruction
+        D2UntrappedOUT:
+                out   dx,al
+   }
+}
 static void PlayMsg_SBMIDI(Bit8u* msg,Bitu len)
 {
         /* Output a MIDI message to the hardware using SB-MIDI */
@@ -660,8 +714,9 @@ static void PlayMsg_MCELL(Bit8u* msg,Bitu len)
   Bit8u voice;
 
   Bit8u mixer;
-  Bit8u notefreq;
-  Bit8u period;
+  unsigned short notefreq;
+  unsigned short period;
+  int pitch;
 
   if (commandMSB == 0x80) //Note off
   {
@@ -682,7 +737,7 @@ static void PlayMsg_MCELL(Bit8u* msg,Bitu len)
                         break;
                 }
     }
-    
+
     // We run out of voices, ignore note off command
     if(voice==MAX_MCELL_CHANNELS)
         {
@@ -805,14 +860,26 @@ static void PlayMsg_MCELL(Bit8u* msg,Bitu len)
 
         velo = (chVolumes[midiChannel]*velo)/127;
 
-        mixer = 0x28 | (((7-octavetable[note])+1) & 7);
+        mixer = 0x28 | ( ((7-octavetable[note])+1) & 7);
 
 //        notefreq = (unsigned short)noteToFreq(note,channelpitch[midiChannel]);
 
 //        if (notefreq == 0) notefreq = 1;
-//        period = 1021429 / notefreq;
+        pitch = channelpitch[midiChannel];
+        if (pitch != 0) {
+           if (pitch > 127) {
+              pitch = 127;
+           } else if (pitch < -128) {
+              pitch = -128;
+           }
+        }
 
-        mcellSound(voice,periodtable[note],mixer,atten[velo],atten[velo]);
+        notefreq = ((unsigned long)freqtable[note] * pitchtable[pitch + 128]) >> 15;
+
+//        period = 1021429 / (freqtable[note]*channelpitch[midiChannel]);
+        period = 1021429 / notefreq;
+
+        mcellSound(voice,period,mixer,atten[velo],atten[velo]);
 
         //mcell_synth[voice].volume = velo;
 
@@ -895,6 +962,9 @@ static void PlayMsg_MCELL(Bit8u* msg,Bitu len)
                           mcell_synth[i].note = 0;
                           mcell_synth[i].priority = 0;
                         }
+                mcellAllDrumOff();
+                DrumCh[0] = 0;
+                DrumCh[1] = 0;
     }
   }
   else if (commandMSB == 0xC0) // Program change
@@ -909,6 +979,9 @@ static void PlayMsg_MCELL(Bit8u* msg,Bitu len)
   {
     //byte pitchBendLSB = getSerialByte();
     //byte pitchBendMSB = getSerialByte();
+       channelpitch[midiChannel] = msg[2];
+       channelpitch[midiChannel] <<= 7;
+       channelpitch[midiChannel] |= msg[1];
   }
 
 /*

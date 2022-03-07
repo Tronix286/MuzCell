@@ -193,6 +193,9 @@ _asm
 // ****
 
 void mcell_pitchwheel(unsigned short oplport, int channel, int pitchwheel) {
+#ifdef MCELL_DEBUG
+        debug_log("PITCHBAND Ch=%u,pitchwheel=%u\n",channel & 0xFF,pitchwheel);
+#endif
   channelpitch[channel] = pitchwheel;
 }
 
@@ -271,7 +274,7 @@ void mcellNoteOn(unsigned char channel, unsigned char note, unsigned char veloci
     if (velocity != 0)
        {
 #ifdef MCELL_DEBUG
-       debug_log("DRUM ON note= %u\n",note);
+//       debug_log("DRUM ON note= %u\n",note);
 #endif
          mixer = 0;
          DrumIdx = 0;

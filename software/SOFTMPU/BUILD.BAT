@@ -18,7 +18,9 @@ del *.map
 @if errorlevel 1 goto end
 %MLEXE% /c /Cx /W2 /WX /nologo /FoSOFTMPU.obj SOFTMPU.ASM
 @if errorlevel 1 goto end
-%LINK% /NOI /BATCH /FAR /NODEFAULTLIBRARYSEARCH mpu401.obj midi.obj pic.obj softmpu.obj,..\softmpu.exe,,,,,
+%MLEXE% /c /Cx /W2 /WX /nologo /Fl /FoH_LDIV.obj H_LDIV.ASM
+@if errorlevel 1 goto end
+%LINK% /NOI /BATCH /FAR /NODEFAULTLIBRARYSEARCH mpu401.obj midi.obj pic.obj softmpu.obj h_ldiv.obj,..\softmpu.exe,,,,,
 :end
 @cd ..
 @set CLEXE=
