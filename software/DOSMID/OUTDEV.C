@@ -679,6 +679,11 @@ void dev_setprog(int channel, int program) {
       awe32ProgramChange(channel, program);
 #endif
       break;
+    case DEV_MCELL:
+#ifdef MCELL
+       mcellProgChange(channel, program);
+#endif
+       break;
     case DEV_RS232:
       rs232_write(outport, 0xC0 | channel); /* Send channel */
       rs232_write(outport, program);        /* Send patch id */

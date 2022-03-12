@@ -6,7 +6,11 @@
 typedef struct {
         unsigned char note;
         unsigned char priority;
+        unsigned char ch;
+        unsigned char voice;
 } mid_channel;
+
+void mcellProgChange(int channel, int program);
 
 void mcell_pitchwheel(unsigned short oplport, int channel, int pitchwheel);
 

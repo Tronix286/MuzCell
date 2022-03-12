@@ -18,7 +18,7 @@ FEATURESLT = -DMCELL
 #  large      64K+ | 64K+
 MODE = m
 
-CFLAGS = -zp2 -lr -we -d0 -y -0 -s -m$(MODE) -wx
+CFLAGS = -zp2 -lr -we -d0 -y -0 -s -m$(MODE) -wx -otexan
 
 all: dosmid.exe
 
