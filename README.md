@@ -1,10 +1,12 @@
 # MuzCell
  Newly made ISA8 sound card. Replica to "Music Sintez Cell" from old soviet "Agat" PC
  
-![render](hardware/v1_0_0/render3.PNG)
+![photo](docs/P1140073.jpg)
 
 ## Prologue
 The prototype of this sound card is a "musical cell" from the old Soviet computer "Agat" (partially Apple II compatible). More information about it here: http://agatcomp.ru/agat/Hardware/SoundNCL/jzs52.shtml (in Russian). So, this sound card is based on original Agat's "musical cell" circuit but the necessary changes have been made to work on the PC ISA8 bus. Also, some components have been replaced with more affordable ones, the timer channel with the IRQ handler was removed because the PC already has its own timer as part of the motherboard.
+
+![render](hardware/v1_0_0/render3.PNG)
 
 ## Description
 This sound card based on two i8253 timers IC (KR580VI53 rus). Each i8253 contains three counters channels, two i8253 provide six independed channels. 
@@ -56,4 +58,3 @@ Duration (D3) changes the duration of the beat (approximately 0.5 seconds with D
 
 The control is practically the same as channel 7, the noise generator is constantly connected and always pulls the main generator. Bit D7 controls GATE input of i8253, so if D7=1 all tone channels are stoped.
 
-Comming sooon.....
