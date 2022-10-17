@@ -287,7 +287,7 @@ void mcell_pitchwheel(unsigned short oplport, int channel, int pitchwheel)
     channelpitch[channel] = pitchwheel;
     for(i=0; i<MAX_MCELL_CHANNELS; i++)
     {
-        if ((mcell_synth[i].ch==channel) & (mcell_synth[i].note != 0))
+        if ((mcell_synth[i].ch==channel) && (mcell_synth[i].note != 0))
         {
           note = mcell_synth[i].note;
           mixer = 0x28 | (((7-octavetable[note])+1) & 7);
